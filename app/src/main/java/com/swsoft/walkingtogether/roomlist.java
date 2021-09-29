@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 public class roomlist extends AppCompatActivity {
+
+    long pressedTime;
 
     ArrayList<roomlist_item> items = new ArrayList<>();
 
@@ -76,6 +79,7 @@ public class roomlist extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(roomlist.this, createroom.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -90,18 +94,24 @@ public class roomlist extends AppCompatActivity {
                     case R.id.notice:
                         Intent intentnotice = new Intent(roomlist.this, notice.class);
                         roomlist.this.startActivity(intentnotice);
+                        finish();
+
                         break;
                     case R.id.myinfo:
                         Intent intentmyinfo = new Intent(roomlist.this, myinfo.class);
                         roomlist.this.startActivity(intentmyinfo);
+                        finish();
+
                         break;
                     case R.id.howto:
                         Intent intenthowto = new Intent(roomlist.this, howto.class);
                         roomlist.this.startActivity(intenthowto);
+
                         break;
                     case R.id.setting:
                         Intent intentsetting = new Intent(roomlist.this, setting.class);
                         roomlist.this.startActivity(intentsetting);
+                        finish();
                         break;
 
                 }
@@ -110,5 +120,29 @@ public class roomlist extends AppCompatActivity {
             }
         });
 
+
+
     }//oncreate
+
+    @Override
+    public void onBackPressed() {
+        if ( pressedTime == 0 ) {
+            Toast.makeText(roomlist.this, " 한 번 더 누르면 로그아웃 됩니다." , Toast.LENGTH_LONG).show();
+            pressedTime = System.currentTimeMillis();
+        }
+        else {
+            int seconds = (int) (System.currentTimeMillis() - pressedTime);
+
+            if ( seconds > 2000 ) {
+                Toast.makeText(roomlist.this, " 한 번 더 누르면 로그아웃 됩니다." , Toast.LENGTH_LONG).show();
+                pressedTime = 0 ;
+            }
+            else {
+                Intent intentsetting = new Intent(roomlist.this, login.class);
+                roomlist.this.startActivity(intentsetting);
+                super.onBackPressed();
+//                finish(); // app 종료 시키기
+            }
+        }
+    }
 }//roomlist

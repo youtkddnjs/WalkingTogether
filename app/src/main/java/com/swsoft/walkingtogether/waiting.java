@@ -33,6 +33,7 @@ public class waiting extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),walking.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -42,9 +43,18 @@ public class waiting extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
+                Intent intent = new Intent(getApplicationContext(),roomlist.class);
+                startActivity(intent);
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getApplicationContext(),roomlist.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

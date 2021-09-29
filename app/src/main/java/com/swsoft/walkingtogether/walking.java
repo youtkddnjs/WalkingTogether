@@ -33,6 +33,7 @@ public class walking  extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),finish.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -42,9 +43,12 @@ public class walking  extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
-                finish();
+
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void onBackPressed() {
+
     }
 }

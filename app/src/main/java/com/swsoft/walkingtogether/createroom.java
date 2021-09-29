@@ -29,11 +29,13 @@ public class createroom extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         Button create = (Button) findViewById(R.id.create);
 
+        //방생성버튼
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),waiting.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -42,10 +44,19 @@ public class createroom extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                Intent intent = new Intent(getApplicationContext(),roomlist.class);
+                startActivity(intent);
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getApplicationContext(),roomlist.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }
 

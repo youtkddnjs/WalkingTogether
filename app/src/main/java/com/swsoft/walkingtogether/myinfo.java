@@ -31,6 +31,8 @@ public class myinfo extends AppCompatActivity {
         confirmmyinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),roomlist.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -42,10 +44,18 @@ public class myinfo extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
+                Intent intent = new Intent(getApplicationContext(),roomlist.class);
+                startActivity(intent);
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getApplicationContext(),roomlist.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 
 }

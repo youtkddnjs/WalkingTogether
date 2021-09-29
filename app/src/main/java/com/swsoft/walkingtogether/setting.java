@@ -1,5 +1,6 @@
 package com.swsoft.walkingtogether;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,9 @@ public class setting extends AppCompatActivity {
         confirmmyinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(),roomlist.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -39,10 +43,21 @@ public class setting extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
+                Intent intent = new Intent(getApplicationContext(),roomlist.class);
+                startActivity(intent);
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getApplicationContext(),roomlist.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
+
+
 
 }

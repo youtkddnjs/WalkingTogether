@@ -21,6 +21,15 @@ public class login extends AppCompatActivity {
     public void login(View view){
         Intent intent = new Intent(this, roomlist.class);
         this.startActivity(intent);
+        finish();
 
     }
+    @Override
+    public void onBackPressed() {
+
+        Intent intentsetting = new Intent(login.this, MainActivity.class);
+        login.this.startActivity(intentsetting);
+        super.onBackPressed();
+    }
+
 }
