@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.swsoft.walkingtogether">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/wticon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/wticon_round"
+        android:supportsRtl="true"
+        android:theme="@style/WalkingTogetherNoActionBar">
+        <activity
+            android:name="com.swsoft.walkingtogether.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.swsoft.walkingtogether.login"></activity>
+        <activity android:name="com.swsoft.walkingtogether.howto"></activity>
+        <activity android:name="com.swsoft.walkingtogether.roomlist"></activity>
+        <activity android:name="com.swsoft.walkingtogether.createroom"></activity>
+        <activity android:name="com.swsoft.walkingtogether.roominfo"></activity>
+        <activity android:name="com.swsoft.walkingtogether.waiting"></activity>
+        <activity android:name="com.swsoft.walkingtogether.walking"></activity>
+        <activity android:name="com.swsoft.walkingtogether.finish"></activity>
+        <activity android:name="com.swsoft.walkingtogether.notice"></activity>
+        <activity android:name="com.swsoft.walkingtogether.myinfo"></activity>
+        <activity android:name="com.swsoft.walkingtogether.userinfo"></activity>
+        <activity android:name="com.swsoft.walkingtogether.users"></activity>
+        <activity android:name="com.swsoft.walkingtogether.setting"></activity>
+
+
+    </application>
+
+</manifest>

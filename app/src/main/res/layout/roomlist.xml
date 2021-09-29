@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/roomlistToolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="함께걸어요"
+            android:textSize="48sp"
+            android:layout_gravity="center"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/roomlistLinserLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintTop_toBottomOf="@+id/roomlistToolbar"
+        app:layout_constraintLeft_toLeftOf="@+id/roomlistToolbar"
+        >
+        <Button
+            android:id="@+id/roomtitle"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="방제목"
+            />
+        <Button
+            android:id="@+id/roomtime"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="시간"
+            />
+        <Button
+            android:id="@+id/roomgoal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="위치"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragmentlinearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/roomlistbottomnavigation"
+        app:layout_constraintTop_toBottomOf="@+id/roomlistLinserLayout"
+        app:layout_constraintVertical_weight="1">
+
+        <fragment
+            android:id="@+id/roomfragment"
+            android:name="com.swsoft.walkingtogether.room_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:id="@+id/roomlist_recyclerview"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+        <!--            android:orientation="vertical"-->
+        <!--            />-->
+
+    </LinearLayout>
+
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/roomlistbottomnavigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@id/fragmentlinearlayout"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:menu="@menu/bottommenu"
+    app:labelVisibilityMode="labeled"
+
+    />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/roomlistfloating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/roomlistbottomnavigation"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_add_circle_outline_24"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
