@@ -4,15 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.kakao.sdk.common.util.Utility;
+
 public class MainActivity extends AppCompatActivity {
+
 long pressedTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String key = Utility.INSTANCE.getKeyHash(this);
+        Log.i("key", key);
+
+
     }
     public void mainlogo(View view){
         Intent intent = new Intent(this, howto.class);
