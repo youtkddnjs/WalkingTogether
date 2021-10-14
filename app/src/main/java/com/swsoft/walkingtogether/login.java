@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,12 +21,19 @@ import kotlin.jvm.functions.Function2;
 
 public class login extends AppCompatActivity {
 
+    EditText inputID;
+    EditText inputPW;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.login);
 
+        inputID = findViewById(R.id.inputID);
+        inputPW = findViewById(R.id.inputPW);
+
+        //kakaologin
         ImageView kakaologin = findViewById(R.id.kakaologin);
         kakaologin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +45,7 @@ public class login extends AppCompatActivity {
                         Log.i("oAuthToken",token);
 
                         if (oAuthToken != null) {
-                            Toast.makeText(login.this, "로그인", Toast.LENGTH_LONG).show();
+                            Toast.makeText(login.this, "로그인", Toast.LENGTH_SHORT).show();
 
                             UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
                                 @Override
@@ -45,6 +53,8 @@ public class login extends AppCompatActivity {
                                     if (user != null) {
                                         kakaologininfo.id = user.getId();
                                         kakaologininfo.nickname = user.getKakaoAccount().getProfile().getNickname();
+                                        kakaologininfo.profileURL = user.getKakaoAccount().getProfile().getProfileImageUrl();
+
 
                                         Intent intent = new Intent(login.this, roomlist.class);
                                         login.this.startActivity(intent);
@@ -63,7 +73,10 @@ public class login extends AppCompatActivity {
         }); //kakaologin.setOnClickListener
     }//oncreate
 
+    //일반 로그인
     public void login(View view) {
+        logininfo.nickname = inputID.getText().toString();
+
         Intent intent = new Intent(this, roomlist.class);
         this.startActivity(intent);
         finish();

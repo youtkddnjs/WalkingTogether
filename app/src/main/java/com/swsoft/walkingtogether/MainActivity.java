@@ -22,18 +22,19 @@ long pressedTime;
         Log.i("key", key);
 
 
-    }
+    } //onCreate
+
     public void mainlogo(View view){
         Intent intent = new Intent(this, howto.class);
         this.startActivity(intent);
 
-    }
+    } //mainlogo
 
     public void gotologin(View view) {
 
         Intent intent = new Intent(this, login.class);
         this.startActivity(intent);
-    }
+    } //gotologin
 
     @Override
     public void onBackPressed() {
@@ -53,5 +54,5 @@ long pressedTime;
 //                finish(); // app 종료 시키기
             }
         }
-    }
-}
+    }//onBackPressed
+} //main

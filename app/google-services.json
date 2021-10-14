@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "528572656256",
+    "project_id": "walkingtogether-31a69",
+    "storage_bucket": "walkingtogether-31a69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528572656256:android:208b395d6d52b2ab44d465",
+        "android_client_info": {
+          "package_name": "com.swsoft.walkingtogether"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528572656256-fu96nn9d6tqrft78eoqcvj3h8ildsgep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAe3eBuPDs-HGtg3jYyzQ0dUsmXj9gTrcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528572656256-fu96nn9d6tqrft78eoqcvj3h8ildsgep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

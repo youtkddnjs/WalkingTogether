@@ -1,6 +1,7 @@
 package com.swsoft.walkingtogether;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.kakao.sdk.user.UserApiClient;
 
 import java.util.ArrayList;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 public class roomlist extends AppCompatActivity {
 
@@ -29,6 +34,7 @@ public class roomlist extends AppCompatActivity {
     FloatingActionButton roomlistfab;
     BottomNavigationView roomlistbottomnavigation;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,8 @@ public class roomlist extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
+
+        loadData();
 
 //임시데이터
         items.add(new roomlist_item("Test01", "00:00", "주소"));
@@ -127,22 +135,35 @@ public class roomlist extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if ( pressedTime == 0 ) {
-            Toast.makeText(roomlist.this, " 한 번 더 누르면 로그아웃 됩니다." , Toast.LENGTH_LONG).show();
+            Toast.makeText(roomlist.this, " 한 번 더 누르면 로그아웃 됩니다." , Toast.LENGTH_SHORT).show();
             pressedTime = System.currentTimeMillis();
         }
         else {
             int seconds = (int) (System.currentTimeMillis() - pressedTime);
 
             if ( seconds > 2000 ) {
-                Toast.makeText(roomlist.this, " 한 번 더 누르면 로그아웃 됩니다." , Toast.LENGTH_LONG).show();
+                Toast.makeText(roomlist.this, " 한 번 더 누르면 로그아웃 됩니다." , Toast.LENGTH_SHORT).show();
                 pressedTime = 0 ;
             }
             else {
+                UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
+                    @Override
+                    public Unit invoke(Throwable throwable) {
+                        return null;
+                    }
+                });
+                Toast.makeText(roomlist.this, " 로그아웃 되었습니다." , Toast.LENGTH_SHORT).show();
                 Intent intentsetting = new Intent(roomlist.this, login.class);
                 roomlist.this.startActivity(intentsetting);
                 super.onBackPressed();
 //                finish(); // app 종료 시키기
             }
         }
+    }
+
+    void loadData(){
+        SharedPreferences pref = getSharedPreferences("account", MODE_PRIVATE);
+        logininfo.nickname = pref.getString("nickname", null);
+        logininfo.profileURL = pref.getString("profile",null);
     }
 }//roomlist
