@@ -48,6 +48,7 @@
         <activity android:name="com.swsoft.walkingtogether.userinfo"></activity>
         <activity android:name="com.swsoft.walkingtogether.users"></activity>
         <activity android:name="com.swsoft.walkingtogether.setting"></activity>
+        <activity android:name="com.swsoft.walkingtogether.signuppage"></activity>
 
     </application>
 

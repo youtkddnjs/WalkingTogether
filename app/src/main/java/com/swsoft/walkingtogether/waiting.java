@@ -58,17 +58,15 @@ public class waiting extends AppCompatActivity {
         send = findViewById(R.id.send);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-
         databaseReference = firebaseDatabase.getReference("chatroomname");
-
-
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 ChattingItem item = snapshot.getValue(ChattingItem.class);
                 chattingItems.add(item);
 
-                chattingAdapter.notifyDataSetChanged();
+                chattingAdapter.notifyDataSetChanged(); //전체를 갱신할때
+//              chattingAdapter.notifyInsertItem();// 리사이클러뷰 에서 가능한 코드
 
                 chatting.setSelection(chattingItems.size()-1);
 
@@ -95,11 +93,10 @@ public class waiting extends AppCompatActivity {
             }
         });
 
-
+        //메세지보내기버튼
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 String sendmessage = message.getText().toString();
                 Calendar calendar = Calendar.getInstance();

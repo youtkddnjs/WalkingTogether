@@ -5,4 +5,5 @@ public class kakaologininfo {
     public static String nickname;
     public static String email;
     public static String profileURL;
+    public static boolean loginway;
 }

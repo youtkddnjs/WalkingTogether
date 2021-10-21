@@ -45,7 +45,6 @@ public class roomlist extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
-
         loadData();
 
 //임시데이터
@@ -81,6 +80,7 @@ public class roomlist extends AppCompatActivity {
         adapter = new roomlist_apater(this, items);
         recyclerView.setAdapter(adapter);
 
+        //새로운 방만들기 버튼
         roomlistfab = findViewById(R.id.roomlistfloating);
         roomlistfab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,10 +88,10 @@ public class roomlist extends AppCompatActivity {
                 Intent intent = new Intent(roomlist.this, createroom.class);
                 startActivity(intent);
                 finish();
-
             }
         });
 
+        //Bottom navigation
         roomlistbottomnavigation = findViewById(R.id.roomlistbottomnavigation);
         roomlistbottomnavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -123,13 +123,9 @@ public class roomlist extends AppCompatActivity {
                         break;
 
                 }
-
                 return false;
             }
         });
-
-
-
     }//oncreate
 
     @Override
@@ -146,12 +142,12 @@ public class roomlist extends AppCompatActivity {
                 pressedTime = 0 ;
             }
             else {
-                UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
-                    @Override
-                    public Unit invoke(Throwable throwable) {
-                        return null;
-                    }
-                });
+//                UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
+//                    @Override
+//                    public Unit invoke(Throwable throwable) {
+//                        return null;
+//                    }
+//                });
                 Toast.makeText(roomlist.this, " 로그아웃 되었습니다." , Toast.LENGTH_SHORT).show();
                 Intent intentsetting = new Intent(roomlist.this, login.class);
                 roomlist.this.startActivity(intentsetting);
@@ -159,11 +155,13 @@ public class roomlist extends AppCompatActivity {
 //                finish(); // app 종료 시키기
             }
         }
-    }
+    }//뒤로가기 버튼
 
+    //load 하기
     void loadData(){
         SharedPreferences pref = getSharedPreferences("account", MODE_PRIVATE);
         logininfo.nickname = pref.getString("nickname", null);
         logininfo.profileURL = pref.getString("profile",null);
     }
+
 }//roomlist

@@ -67,15 +67,9 @@ public class myinfo extends AppCompatActivity {
         nickname = findViewById(R.id.nickname);
         profileImage = findViewById(R.id.myinfoprofile_image);
 
-        //SharedPreferences에 저장되어 있는 닉네임, 프로필이미지 있다면 읽어오기
 
-        loadData();
-        if(logininfo.nickname != null){
-            nickname.setText(logininfo.nickname);
-            Glide.with(myinfo.this).load(logininfo.profileURL).into(profileImage);
-            isFirst = false;
-        }
-
+        nickname.setText(logininfo.nickname);
+        Glide.with(myinfo.this).load(logininfo.profileURL).into(profileImage);
 
         //프로필 사진 변경 버튼
         myinfoprofile_imageedit = findViewById(R.id.myinfoprofile_imageedit);
@@ -87,6 +81,10 @@ public class myinfo extends AppCompatActivity {
                 resultLauncher.launch(intent);
             }
         }); //프로필 사진 변경 버튼
+        if(kakaologininfo.loginway){
+            myinfoprofile_imageedit.setClickable(false);
+            myinfoprofile_imageedit.setText("카카오 프로필");
+        }
 
 
         //확인 버튼 클릭시 roomlist로 이동
@@ -94,12 +92,8 @@ public class myinfo extends AppCompatActivity {
         confirmmyinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                saveData();
-//                Intent intent = new Intent(getApplicationContext(),roomlist.class);
-//                startActivity(intent);
-//                finish();
 
-                if(isFirst||isChanged){
+                if(isChanged){
                     saveData();
                     Intent intent = new Intent(getApplicationContext(),roomlist.class);
                     startActivity(intent);
@@ -115,30 +109,8 @@ public class myinfo extends AppCompatActivity {
 
 
 
-//        Glide.with(myinfo.this).load(kakaologininfo.profileURL).into(profileImage);
-
-
     }//oncreate
 
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
-            case android.R.id.home:
-                Intent intent = new Intent(getApplicationContext(),roomlist.class);
-                startActivity(intent);
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    } //onPotionsItemSelected
-
-
-    public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(),roomlist.class);
-        startActivity(intent);
-        super.onBackPressed();
-    } //onBackPressed
 
     //이미지 결과를 가져와서 실행하는 객체
     ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -154,7 +126,7 @@ public class myinfo extends AppCompatActivity {
                 isChanged = true;
             }
         }
-    });
+    }); // resultLauncher
 
     void saveData(){
         if(imageURI == null) return;
@@ -179,9 +151,9 @@ public class myinfo extends AppCompatActivity {
                         logininfo.profileURL = uri.toString();
 
                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference profilesRef = firebaseDatabase.getReference("profiles");
+                        DatabaseReference profilesRef = firebaseDatabase.getReference("member/"+logininfo.id);
 
-                        profilesRef.child(logininfo.nickname).setValue(logininfo.profileURL);
+                        profilesRef.child("ProFile").setValue(logininfo.profileURL);
 
                         //SharedPreferences에 저장하기
                         SharedPreferences pref = getSharedPreferences("account", MODE_PRIVATE);
@@ -189,23 +161,34 @@ public class myinfo extends AppCompatActivity {
                         SharedPreferences.Editor editor = pref.edit();
                         
                         //쓰기작업
-                        editor.putString("nickname", logininfo.nickname);
                         editor.putString("profile",logininfo.profileURL);
 
                         //쓰기 작업 종료
                         editor.commit();
-
-                    }
-                });
-            }
+                    } //onSuccess
+                }); //imgRef.getDownloadUrl().addOnSuccessListener
+            } // onSuccess
         }); //업로드 성공시
     } //saveData
 
-    void loadData(){
-        SharedPreferences pref = getSharedPreferences("account", MODE_PRIVATE);
-        logininfo.nickname = pref.getString("nickname", null);
-        logininfo.profileURL = pref.getString("profile",null);
-    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                Intent intent = new Intent(getApplicationContext(),roomlist.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    } //onPotionsItemSelected
+
+
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(),roomlist.class);
+        startActivity(intent);
+        super.onBackPressed();
+    } //onBackPressed
 
 
 } //main

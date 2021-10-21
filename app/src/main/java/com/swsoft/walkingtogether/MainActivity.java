@@ -50,8 +50,8 @@ long pressedTime;
                 pressedTime = 0 ;
             }
             else {
-                super.onBackPressed();
-//                finish(); // app 종료 시키기
+//                super.onBackPressed();
+                finish(); // app 종료 시키기
             }
         }
     }//onBackPressed

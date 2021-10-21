@@ -63,7 +63,6 @@ public class ChattingAdapter extends BaseAdapter {
         tvName.setText(item.name);
         tvMsg.setText(item.message);
         tvTime.setText(item.time);
-
         Glide.with(context).load(item.profile).into(civ);
 
         return itemView;
