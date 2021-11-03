@@ -6,13 +6,21 @@
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/drawable/WTicon_foreground.xml" value="0.2265625" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/drawable/edittext_box.xml" value="0.378125" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/createroom.xml" value="0.36614583333333334" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/finish.xml" value="0.36614583333333334" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/howto.xml" value="0.36614583333333334" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/login.xml" value="0.33" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/myinfo.xml" value="0.3619791666666667" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/mymessagebox.xml" value="0.3619791666666667" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/notice.xml" value="0.36614583333333334" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/roominfo.xml" value="0.36614583333333334" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/roomlist.xml" value="0.3619791666666667" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/roomlist_fragment.xml" value="0.36614583333333334" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/roomlist_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/roomlist_recyclerview.xml" value="0.32685185185185184" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/setting.xml" value="0.32546296296296295" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/signuppage.xml" value="0.36614583333333334" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/spinner_selected.xml" value="0.18981481481481483" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/usermessagebox.xml" value="0.3619791666666667" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/users.xml" value="0.36614583333333334" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/waiting.xml" value="0.33" />

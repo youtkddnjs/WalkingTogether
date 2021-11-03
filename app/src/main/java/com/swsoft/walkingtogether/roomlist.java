@@ -25,15 +25,13 @@ import kotlin.jvm.functions.Function1;
 
 public class roomlist extends AppCompatActivity {
 
-    long pressedTime;
-
+//    RecyclerView recyclerView;
+//    roomlist_apater adapter;
     ArrayList<roomlist_item> items = new ArrayList<>();
-
-    RecyclerView recyclerView;
-    roomlist_apater adapter;
     FloatingActionButton roomlistfab;
     BottomNavigationView roomlistbottomnavigation;
 
+    long pressedTime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,38 +45,10 @@ public class roomlist extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         loadData();
 
-//임시데이터
-        items.add(new roomlist_item("Test01", "00:00", "주소"));
-        items.add(new roomlist_item("Test02", "00:00", "주소"));
-        items.add(new roomlist_item("Test03", "00:00", "주소"));
-        items.add(new roomlist_item("Test04", "00:00", "주소"));
-        items.add(new roomlist_item("Test05", "00:00", "주소"));
-        items.add(new roomlist_item("Test06", "00:00", "주소"));
-        items.add(new roomlist_item("Test07", "00:00", "주소"));
-        items.add(new roomlist_item("Test08", "00:00", "주소"));
-        items.add(new roomlist_item("Test09", "00:00", "주소"));
-        items.add(new roomlist_item("Test01", "00:00", "주소"));
-        items.add(new roomlist_item("Test02", "00:00", "주소"));
-        items.add(new roomlist_item("Test03", "00:00", "주소"));
-        items.add(new roomlist_item("Test04", "00:00", "주소"));
-        items.add(new roomlist_item("Test05", "00:00", "주소"));
-        items.add(new roomlist_item("Test06", "00:00", "주소"));
-        items.add(new roomlist_item("Test07", "00:00", "주소"));
-        items.add(new roomlist_item("Test08", "00:00", "주소"));
-        items.add(new roomlist_item("Test09", "00:00", "주소"));
-        items.add(new roomlist_item("Test01", "00:00", "주소"));
-        items.add(new roomlist_item("Test02", "00:00", "주소"));
-        items.add(new roomlist_item("Test03", "00:00", "주소"));
-        items.add(new roomlist_item("Test04", "00:00", "주소"));
-        items.add(new roomlist_item("Test05", "00:00", "주소"));
-        items.add(new roomlist_item("Test06", "00:00", "주소"));
-        items.add(new roomlist_item("Test07", "00:00", "주소"));
-        items.add(new roomlist_item("Test08", "00:00", "주소"));
-        items.add(new roomlist_item("Test09", "00:00", "주소"));
 
-        recyclerView = findViewById(R.id.roomlist_recyclerview);
-        adapter = new roomlist_apater(this, items);
-        recyclerView.setAdapter(adapter);
+//        recyclerView = findViewById(R.id.roomlist_recyclerview);
+//        adapter = new roomlist_apater(this, items);
+//        recyclerView.setAdapter(adapter);
 
         //새로운 방만들기 버튼
         roomlistfab = findViewById(R.id.roomlistfloating);
