@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -26,12 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
-import retrofit2.http.POST;
-
-public class signuppage extends AppCompatActivity {
+public class SignupPage extends AppCompatActivity {
 
     TextInputLayout accountInputLayout;
     TextInputEditText account;
@@ -53,7 +49,7 @@ public class signuppage extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.signuppage);
+        setContentView(R.layout.activity_signuppage);
 
         //툴바 생성
         Toolbar signupToolbar = findViewById(R.id.signupToolbar);
@@ -125,7 +121,7 @@ public class signuppage extends AppCompatActivity {
                         System.out.println("입력된 ID정보 :" + account.getText().toString());
                         System.out.println("children(계정) 갯수 : "+snapshot.getChildrenCount());
                         for(DataSnapshot t : keys){
-                            signupItem item = t.getValue(signupItem.class);
+                            SignupItem item = t.getValue(SignupItem.class);
                             System.out.println("보유하고있는 계정 :" + item.ID);
                             if(account.getText().toString().equals(item.ID)){
                                 System.out.println("중복되었습니다.");
@@ -139,7 +135,7 @@ public class signuppage extends AppCompatActivity {
                         }//for문
                         
                         //다이얼로그
-                        AlertDialog.Builder builder=new AlertDialog.Builder(signuppage.this);
+                        AlertDialog.Builder builder=new AlertDialog.Builder(SignupPage.this);
                         builder.setTitle("ID 중복 체크");
                         if( idCehck){
                             builder.setMessage("사용가능 합니다.");
@@ -260,7 +256,7 @@ public class signuppage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder=new AlertDialog.Builder(signuppage.this);
+                AlertDialog.Builder builder=new AlertDialog.Builder(SignupPage.this);
                 builder.setTitle("회원가입");
 
                 if(accountOK && passwordOK && nicknameOK) {
@@ -275,13 +271,13 @@ public class signuppage extends AppCompatActivity {
                     String NewProFile = "https://firebasestorage.googleapis.com/v0/b/walkingtogether-31a69.appspot.com/o/profileImage%2Fdefault%2Fdefault.png?alt=media&token=d2951f38-63c6-46f3-8c43-529c88e3454b";
 
                     //정보를 Item으로 만들어서 보낼것
-                    signupItem item = new signupItem(NewID,NewPW,NewNickName,NewProFile);
+                    SignupItem item = new SignupItem(NewID,NewPW,NewNickName,NewProFile);
 
                     //ID를 Key으로한 노드에 정보 입력됨.
                     signupRef.child(NewID).setValue(item);
 
                     builder.setMessage("축하드립니다.");
-                    Intent intent = new Intent(signuppage.this, login.class);
+                    Intent intent = new Intent(SignupPage.this, Login.class);
                     startActivity(intent);
                     finish();
 
@@ -306,7 +302,7 @@ public class signuppage extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
-                Intent intent = new Intent(getApplicationContext(),login.class);
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -316,7 +312,7 @@ public class signuppage extends AppCompatActivity {
 
 
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(),login.class);
+        Intent intent = new Intent(getApplicationContext(), Login.class);
         startActivity(intent);
         super.onBackPressed();
     } //onBackPressed

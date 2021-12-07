@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,11 +24,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class waiting extends AppCompatActivity {
+public class Waiting extends AppCompatActivity {
 
     ArrayList<ChattingItem> chattingItems = new ArrayList<>();
     ListView chatting;
     EditText message;
+    Button start;
     Button send;
     ChattingAdapter chattingAdapter;
 
@@ -39,21 +39,23 @@ public class waiting extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.waiting);
+        setContentView(R.layout.activity_waiting);
 
+        //### Toolbar
         Toolbar createRoomToolBar = findViewById(R.id.waitingToolbar);
         setSupportActionBar(createRoomToolBar);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        Button start = (Button) findViewById(R.id.start);
+
 
         chatting = findViewById(R.id.chatting);
-        chattingAdapter = new ChattingAdapter(waiting.this, chattingItems);
+        chattingAdapter = new ChattingAdapter(Waiting.this, chattingItems);
         chatting.setAdapter(chattingAdapter);
+        //Toolbar ###
 
-
+        start = findViewById(R.id.start);
         message = findViewById(R.id.message);
         send = findViewById(R.id.send);
 
@@ -103,7 +105,7 @@ public class waiting extends AppCompatActivity {
                 String time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
 
                 //item단위로 서버로 저장하기
-                ChattingItem item = new ChattingItem(logininfo.nickname,sendmessage,time,logininfo.profileURL);
+                ChattingItem item = new ChattingItem(LoginUserInfo.nickname,sendmessage,time, LoginUserInfo.profileURL);
                 databaseReference.push().setValue(item);
                 message.setText("");
             }
@@ -115,7 +117,7 @@ public class waiting extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),walking.class);
+                Intent intent = new Intent(getApplicationContext(), Walking.class);
                 startActivity(intent);
                 finish();
             }
@@ -128,7 +130,7 @@ public class waiting extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
-                Intent intent = new Intent(getApplicationContext(),roomlist.class);
+                Intent intent = new Intent(getApplicationContext(), RoomList.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -140,7 +142,7 @@ public class waiting extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(getApplicationContext(),roomlist.class);
+        Intent intent = new Intent(getApplicationContext(), RoomList.class);
         startActivity(intent);
         super.onBackPressed();
     }

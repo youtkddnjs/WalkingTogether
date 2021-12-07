@@ -1,4 +1,4 @@
 package com.swsoft.walkingtogether;
 
-public class userinfo {
+public class JoinUsers {
 }

@@ -9,29 +9,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="5"
+        android:weightSum="4"
         >
-        <Button
+        <TextView
             android:id="@+id/roomtitle"
             android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="방제목"
+            android:background="@drawable/list_box"
+            android:textSize="24sp"
+            android:gravity="center"
             />
-        <Button
+
+        <TextView
             android:id="@+id/roomtime"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/list_box"
             android:text="00:00"
+            android:textSize="24sp"
+            android:gravity="center"
             />
-        <Button
-            android:id="@+id/roomgoal"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="위치"
-            />
+
 
     </LinearLayout>
 

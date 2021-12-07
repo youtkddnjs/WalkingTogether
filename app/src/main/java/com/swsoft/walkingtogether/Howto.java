@@ -1,6 +1,5 @@
 package com.swsoft.walkingtogether;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,48 +12,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
-public class finish extends AppCompatActivity {
 
+public class Howto extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.finish);
+        setContentView(R.layout.activity_howto);
 
-        Toolbar createRoomToolBar = findViewById(R.id.finishRoomToolbar);
-        setSupportActionBar(createRoomToolBar);
+        Toolbar howtoToolbar = findViewById(R.id.howtoToolbar);
+        setSupportActionBar(howtoToolbar);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        Button complete = (Button) findViewById(R.id.complete);
-
-        complete.setOnClickListener(new View.OnClickListener() {
+        Button confirmhowto = findViewById(R.id.confirm_howto);
+        confirmhowto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),roomlist.class);
-                startActivity(intent);
                 finish();
             }
         });
+
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+        switch(item.getItemId()){
             case android.R.id.home:
-                Intent intent = new Intent(getApplicationContext(),roomlist.class);
-                startActivity(intent);
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
-
+    @Override
     public void onBackPressed() {
-
-        Intent intent = new Intent(getApplicationContext(),roomlist.class);
-        startActivity(intent);
         super.onBackPressed();
     }
 }
-

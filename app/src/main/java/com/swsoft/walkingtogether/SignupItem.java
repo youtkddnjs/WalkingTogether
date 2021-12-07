@@ -1,16 +1,16 @@
 package com.swsoft.walkingtogether;
 
-public class signupItem {
+public class SignupItem {
 
     public String ID;
     public String PW;
     public String NickName;
     public String ProFile;
 
-    public signupItem() {
+    public SignupItem() {
     }
 
-    public signupItem(String newID, String newPW, String newNickName, String newProFile) {
+    public SignupItem(String newID, String newPW, String newNickName, String newProFile) {
         ID = newID;
         PW = newPW;
         NickName = newNickName;

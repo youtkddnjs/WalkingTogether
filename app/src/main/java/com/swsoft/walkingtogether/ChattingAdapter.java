@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -49,7 +47,7 @@ public class ChattingAdapter extends BaseAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         
         //채팅을 보내는 닉네임에 의해 뷰를 선택
-        if( item.name.equals(logininfo.nickname) ){
+        if( item.name.equals(LoginUserInfo.nickname) ){
             itemView = inflater.inflate(R.layout.mymessagebox, parent, false);
         }else{
             itemView = inflater.inflate(R.layout.usermessagebox, parent, false);

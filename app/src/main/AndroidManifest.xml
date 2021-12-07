@@ -3,6 +3,9 @@
     package="com.swsoft.walkingtogether">
     
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".GlobalApplication"
@@ -35,20 +38,33 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.swsoft.walkingtogether.login"></activity>
-        <activity android:name="com.swsoft.walkingtogether.howto"></activity>
-        <activity android:name="com.swsoft.walkingtogether.roomlist"></activity>
-        <activity android:name="com.swsoft.walkingtogether.createroom"></activity>
-        <activity android:name="com.swsoft.walkingtogether.roominfo"></activity>
-        <activity android:name="com.swsoft.walkingtogether.waiting"></activity>
-        <activity android:name="com.swsoft.walkingtogether.walking"></activity>
-        <activity android:name="com.swsoft.walkingtogether.finish"></activity>
-        <activity android:name="com.swsoft.walkingtogether.notice"></activity>
-        <activity android:name="com.swsoft.walkingtogether.myinfo"></activity>
-        <activity android:name="com.swsoft.walkingtogether.userinfo"></activity>
-        <activity android:name="com.swsoft.walkingtogether.users"></activity>
-        <activity android:name="com.swsoft.walkingtogether.setting"></activity>
-        <activity android:name="com.swsoft.walkingtogether.signuppage"></activity>
+        <activity android:name="com.swsoft.walkingtogether.Login"></activity>
+        <activity android:name="com.swsoft.walkingtogether.Howto"></activity>
+        <activity android:name="com.swsoft.walkingtogether.RoomList"></activity>
+        <activity android:name="com.swsoft.walkingtogether.CreateRoom"></activity>
+        <activity android:name="com.swsoft.walkingtogether.RoomInfo"></activity>
+        <activity android:name="com.swsoft.walkingtogether.Waiting"></activity>
+        <activity android:name="com.swsoft.walkingtogether.Walking"></activity>
+        <activity android:name="com.swsoft.walkingtogether.Finish"></activity>
+        <activity android:name="com.swsoft.walkingtogether.Notice"></activity>
+        <activity android:name="com.swsoft.walkingtogether.MyInfo"></activity>
+        <activity android:name="com.swsoft.walkingtogether.UserInfo"></activity>
+        <activity android:name="com.swsoft.walkingtogether.JoinUsers"></activity>
+        <activity android:name="com.swsoft.walkingtogether.Setting"></activity>
+        <activity android:name="com.swsoft.walkingtogether.SignupPage"></activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBsNut6-NKtQU3fksfk7zE8WVlPOw0-5Q8" />
+
 
     </application>
 

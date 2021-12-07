@@ -5,7 +5,17 @@
       <map>
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/drawable/WTicon_foreground.xml" value="0.2265625" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/drawable/edittext_box.xml" value="0.378125" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.33515981735159817" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.33515981735159817" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/drawable/list_box.xml" value="0.33515981735159817" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/drawable/title_box.xml" value="0.33515981735159817" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/activity_createroom.xml" value="0.32546296296296295" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/activity_howto.xml" value="0.32546296296296295" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/activity_login.xml" value="0.32546296296296295" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/activity_roominfo.xml" value="0.32546296296296295" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/activity_roomlist.xml" value="0.32546296296296295" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/activity_userinfo.xml" value="0.32546296296296295" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/createroom.xml" value="0.36614583333333334" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/finish.xml" value="0.36614583333333334" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/howto.xml" value="0.36614583333333334" />
@@ -21,6 +31,7 @@
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/setting.xml" value="0.32546296296296295" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/signuppage.xml" value="0.36614583333333334" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/spinner_selected.xml" value="0.18981481481481483" />
+        <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/userinfo.xml" value="0.32546296296296295" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/usermessagebox.xml" value="0.3619791666666667" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/users.xml" value="0.36614583333333334" />
         <entry key="..\:/WalkingTogether/WalkingTogether_Project/app/src/main/res/layout/waiting.xml" value="0.33" />

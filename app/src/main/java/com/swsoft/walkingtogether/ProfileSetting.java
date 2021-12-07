@@ -1,4 +1,4 @@
 package com.swsoft.walkingtogether;
 
-public class profilesetting {
+public class ProfileSetting {
 }

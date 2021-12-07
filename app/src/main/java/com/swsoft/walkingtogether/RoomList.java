@@ -12,22 +12,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.kakao.sdk.user.UserApiClient;
 
 import java.util.ArrayList;
 
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
+public class RoomList extends AppCompatActivity {
 
-public class roomlist extends AppCompatActivity {
-
-//    RecyclerView recyclerView;
-//    roomlist_apater adapter;
-    ArrayList<roomlist_item> items = new ArrayList<>();
+    ArrayList<RoomListItem> items = new ArrayList<>();
     FloatingActionButton roomlistfab;
     BottomNavigationView roomlistbottomnavigation;
 
@@ -36,26 +29,20 @@ public class roomlist extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.roomlist);
+        setContentView(R.layout.activity_roomlist);
 
         Toolbar roomlistToolbar = findViewById(R.id.roomlistToolbar);
         setSupportActionBar(roomlistToolbar);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
-        loadData();
-
-
-//        recyclerView = findViewById(R.id.roomlist_recyclerview);
-//        adapter = new roomlist_apater(this, items);
-//        recyclerView.setAdapter(adapter);
 
         //새로운 방만들기 버튼
         roomlistfab = findViewById(R.id.roomlistfloating);
         roomlistfab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(roomlist.this, createroom.class);
+                Intent intent = new Intent(RoomList.this, CreateRoom.class);
                 startActivity(intent);
                 finish();
             }
@@ -70,25 +57,25 @@ public class roomlist extends AppCompatActivity {
                 switch(item.getItemId()){
 
                     case R.id.notice:
-                        Intent intentnotice = new Intent(roomlist.this, notice.class);
-                        roomlist.this.startActivity(intentnotice);
+                        Intent intentnotice = new Intent(RoomList.this, Notice.class);
+                        RoomList.this.startActivity(intentnotice);
                         finish();
 
                         break;
                     case R.id.myinfo:
-                        Intent intentmyinfo = new Intent(roomlist.this, myinfo.class);
-                        roomlist.this.startActivity(intentmyinfo);
+                        Intent intentmyinfo = new Intent(RoomList.this, MyInfo.class);
+                        RoomList.this.startActivity(intentmyinfo);
                         finish();
 
                         break;
                     case R.id.howto:
-                        Intent intenthowto = new Intent(roomlist.this, howto.class);
-                        roomlist.this.startActivity(intenthowto);
+                        Intent intenthowto = new Intent(RoomList.this, Howto.class);
+                        RoomList.this.startActivity(intenthowto);
 
                         break;
                     case R.id.setting:
-                        Intent intentsetting = new Intent(roomlist.this, setting.class);
-                        roomlist.this.startActivity(intentsetting);
+                        Intent intentsetting = new Intent(RoomList.this, Setting.class);
+                        RoomList.this.startActivity(intentsetting);
                         finish();
                         break;
 
@@ -101,26 +88,20 @@ public class roomlist extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if ( pressedTime == 0 ) {
-            Toast.makeText(roomlist.this, " 한 번 더 누르면 로그아웃 됩니다." , Toast.LENGTH_SHORT).show();
+            Toast.makeText(RoomList.this, " 한 번 더 누르면 로그아웃 됩니다." , Toast.LENGTH_SHORT).show();
             pressedTime = System.currentTimeMillis();
         }
         else {
             int seconds = (int) (System.currentTimeMillis() - pressedTime);
 
             if ( seconds > 2000 ) {
-                Toast.makeText(roomlist.this, " 한 번 더 누르면 로그아웃 됩니다." , Toast.LENGTH_SHORT).show();
+                Toast.makeText(RoomList.this, " 한 번 더 누르면 로그아웃 됩니다." , Toast.LENGTH_SHORT).show();
                 pressedTime = 0 ;
             }
             else {
-//                UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
-//                    @Override
-//                    public Unit invoke(Throwable throwable) {
-//                        return null;
-//                    }
-//                });
-                Toast.makeText(roomlist.this, " 로그아웃 되었습니다." , Toast.LENGTH_SHORT).show();
-                Intent intentsetting = new Intent(roomlist.this, login.class);
-                roomlist.this.startActivity(intentsetting);
+                Toast.makeText(RoomList.this, " 로그아웃 되었습니다." , Toast.LENGTH_SHORT).show();
+                Intent intentsetting = new Intent(RoomList.this, Login.class);
+                RoomList.this.startActivity(intentsetting);
                 super.onBackPressed();
 //                finish(); // app 종료 시키기
             }
@@ -130,8 +111,8 @@ public class roomlist extends AppCompatActivity {
     //load 하기
     void loadData(){
         SharedPreferences pref = getSharedPreferences("account", MODE_PRIVATE);
-        logininfo.nickname = pref.getString("nickname", null);
-        logininfo.profileURL = pref.getString("profile",null);
+        LoginUserInfo.nickname = pref.getString("nickname", null);
+        LoginUserInfo.profileURL = pref.getString("profile",null);
     }
 
 }//roomlist

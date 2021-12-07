@@ -21,18 +21,17 @@ long pressedTime;
         String key = Utility.INSTANCE.getKeyHash(this);
         Log.i("key", key);
 
-
     } //onCreate
 
     public void mainlogo(View view){
-        Intent intent = new Intent(this, howto.class);
+        Intent intent = new Intent(this, Howto.class);
         this.startActivity(intent);
 
     } //mainlogo
 
     public void gotologin(View view) {
 
-        Intent intent = new Intent(this, login.class);
+        Intent intent = new Intent(this, Login.class);
         this.startActivity(intent);
     } //gotologin
 

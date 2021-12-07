@@ -13,42 +13,51 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
-public class walking  extends AppCompatActivity {
+public class Setting extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.walking);
+        setContentView(R.layout.activity_setting);
 
-        Toolbar createRoomToolBar = findViewById(R.id.walkingRoomToolbar);
-        setSupportActionBar(createRoomToolBar);
+        Toolbar settingToolbar = findViewById(R.id.settingToolbar);
+        setSupportActionBar(settingToolbar);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        Button finish = (Button) findViewById(R.id.finish);
 
-        finish.setOnClickListener(new View.OnClickListener() {
+        Button confirmmyinfo = findViewById(R.id.confirm_setting);
+        confirmmyinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),finish.class);
+
+                Intent intent = new Intent(getApplicationContext(), RoomList.class);
                 startActivity(intent);
                 finish();
             }
         });
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
-
+                Intent intent = new Intent(getApplicationContext(), RoomList.class);
+                startActivity(intent);
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
     public void onBackPressed() {
 
+        Intent intent = new Intent(getApplicationContext(), RoomList.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
+
+
+
 }

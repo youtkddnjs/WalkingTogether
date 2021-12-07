@@ -26,31 +26,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="5"
+        android:weightSum="4"
         app:layout_constraintTop_toBottomOf="@+id/roomlistToolbar"
         app:layout_constraintLeft_toLeftOf="@+id/roomlistToolbar"
         >
-        <Button
+
+        <TextView
             android:id="@+id/roomtitle"
             android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="방제목"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:background="@drawable/title_box"
+
             />
-        <Button
+        <TextView
             android:id="@+id/roomtime"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="시간"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:background="@drawable/title_box"
             />
-        <Button
-            android:id="@+id/roomgoal"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="위치"
-            />
+
 
     </LinearLayout>
 
@@ -66,17 +68,10 @@
 
         <fragment
             android:id="@+id/roomfragment"
-            android:name="com.swsoft.walkingtogether.room_fragment"
+            android:name="com.swsoft.walkingtogether.RoomListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <!--        <androidx.recyclerview.widget.RecyclerView-->
-        <!--            android:id="@+id/roomlist_recyclerview"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-        <!--            android:orientation="vertical"-->
-        <!--            />-->
 
     </LinearLayout>
 

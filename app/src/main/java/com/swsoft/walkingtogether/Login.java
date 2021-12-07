@@ -27,7 +27,7 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 
 
-public class login extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     EditText inputID;
     EditText inputPW;
@@ -39,7 +39,7 @@ public class login extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
 
         inputID = findViewById(R.id.inputID);
         inputPW = findViewById(R.id.inputPW);
@@ -49,14 +49,14 @@ public class login extends AppCompatActivity {
         kakaologin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserApiClient.getInstance().loginWithKakaoAccount(login.this, new Function2<OAuthToken, Throwable, Unit>() {
+                UserApiClient.getInstance().loginWithKakaoAccount(Login.this, new Function2<OAuthToken, Throwable, Unit>() {
                     @Override
                     public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
                         String token = String.valueOf(oAuthToken);
                         Log.i("oAuthToken",token);
 
                         if (oAuthToken != null) {
-                            Toast.makeText(login.this, "로그인", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "로그인", Toast.LENGTH_SHORT).show();
 
                             UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
                                 @Override
@@ -64,7 +64,6 @@ public class login extends AppCompatActivity {
                                     if (user != null) {
 
                                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                                        //"member" 참조 노드 객체
                                         DatabaseReference signupRef = firebaseDatabase.getReference("member");
 
                                         String NewID = user.getId()+"";
@@ -73,7 +72,7 @@ public class login extends AppCompatActivity {
                                         String NewProFile = user.getKakaoAccount().getProfile().getProfileImageUrl();
 
                                         //정보를 Item으로 만들어서 보낼것
-                                        signupItem item = new signupItem(NewID,NewPW,NewNickName,NewProFile);
+                                        SignupItem item = new SignupItem(NewID,NewPW,NewNickName,NewProFile);
 
                                         //ID를 Key으로한 노드에 정보 입력됨.
                                         signupRef.child(NewID).setValue(item);
@@ -81,20 +80,22 @@ public class login extends AppCompatActivity {
 //                                        kakaologininfo.id = user.getId();
 //                                        kakaologininfo.nickname = user.getKakaoAccount().getProfile().getNickname();
 //                                        kakaologininfo.profileURL = user.getKakaoAccount().getProfile().getProfileImageUrl();
-                                        logininfo.id= user.getId()+"";
-                                        logininfo.nickname=user.getKakaoAccount().getProfile().getNickname();
-                                        logininfo.profileURL=user.getKakaoAccount().getProfile().getProfileImageUrl();
+                                        LoginUserInfo.id = user.getId()+"";
+                                        LoginUserInfo.nickname = user.getKakaoAccount().getProfile().getNickname();
+                                        LoginUserInfo.profileURL = user.getKakaoAccount().getProfile().getProfileImageUrl();
                                         savedata();
-                                        kakaologininfo.loginway=true;
-                                        Intent intent = new Intent(login.this, roomlist.class);
-                                        login.this.startActivity(intent);
+
+                                        KakaoLoginUserInfo.loginway=true;
+
+                                        Intent intent = new Intent(Login.this, RoomList.class);
+                                        Login.this.startActivity(intent);
                                         finish();
                                     }//if
                                     return null;
                                 }// invok
                             }); // UserApiClient.getInstance
                         } else {
-                            Toast.makeText(login.this, "사용자 정보 실패", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "사용자 정보 실패", Toast.LENGTH_SHORT).show();
                         } //else
                         return null;
                     } // invok
@@ -105,20 +106,22 @@ public class login extends AppCompatActivity {
 
     //일반 로그인
     public void login(View view) {
-        dologin();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference dologinRef = firebaseDatabase.getReference("member");
+        dologinRef.addValueEventListener(valueEventListener);
     }
 
+    //뒤로가기 버튼
     @Override
     public void onBackPressed() {
-
-        Intent intentsetting = new Intent(login.this, MainActivity.class);
-        login.this.startActivity(intentsetting);
+        Intent intentsetting = new Intent(Login.this, MainActivity.class);
+        Login.this.startActivity(intentsetting);
         super.onBackPressed();
     }
 
     //회원가입 버튼
     public void signUp(View view) {
-        Intent intent = new Intent(this, signuppage.class);
+        Intent intent = new Intent(this, SignupPage.class);
         this.startActivity(intent);
         finish();
     }//회원가입 버튼
@@ -130,17 +133,17 @@ public class login extends AppCompatActivity {
         public void onDataChange(@NonNull DataSnapshot snapshot) {
             Iterable<DataSnapshot> keys = snapshot.getChildren();
             for (DataSnapshot t : keys) {
-                signupItem item = t.getValue(signupItem.class);
+                SignupItem item = t.getValue(SignupItem.class);
                 if (inputID.getText().toString().equals(item.ID)) {
                     idcount=-1; //아이디를 찾으면 -1
                     if(inputPW.getText().toString().equals(item.PW)){
                         pwcount=-1;
-                        logininfo.id=item.ID;
-                        logininfo.nickname=item.NickName;
-                        logininfo.profileURL=item.ProFile;
+                        LoginUserInfo.id=item.ID;
+                        LoginUserInfo.nickname=item.NickName;
+                        LoginUserInfo.profileURL=item.ProFile;
                         break;
                     }else{
-                        AlertDialog.Builder builder = new AlertDialog.Builder(login.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
                         builder.setTitle("로그인실패");
                         builder.setMessage("비밀번호를 못 찾았습니다.");
                         AlertDialog dialog = builder.create();
@@ -154,7 +157,7 @@ public class login extends AppCompatActivity {
             }//아이디를찾는 for문
 
             if(idcount>0){ //아이디를 못찾아서 증가되면 아래 실행
-                AlertDialog.Builder builder = new AlertDialog.Builder(login.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
                 builder.setTitle("로그인실패");
                 builder.setMessage("아이디를 찾지 못하였습니다.");
                 AlertDialog dialog = builder.create();
@@ -163,8 +166,8 @@ public class login extends AppCompatActivity {
 
             if(pwcount==-1){
                 savedata();
-                Intent intent = new Intent(login.this, roomlist.class);
-                login.this.startActivity(intent);
+                Intent intent = new Intent(Login.this, RoomList.class);
+                Login.this.startActivity(intent);
                 finish();
             }
 
@@ -174,19 +177,8 @@ public class login extends AppCompatActivity {
         public void onCancelled(@NonNull DatabaseError error) {
 
         }
-    };
+    }; //valueEventListener
 
-    void dologin(){
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference dologinRef = firebaseDatabase.getReference("member");
-        dologinRef.addValueEventListener(valueEventListener);
-    }//dolgin
-
-//    //화면에 안보이기 시작할때
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//    }
 
     //액티비티가 메모리에서 사라질때!
     @Override
@@ -203,9 +195,9 @@ public class login extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("account", MODE_PRIVATE);
         //쓰기작업 시작을 알림
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("id",logininfo.id);
-        editor.putString("nickname", logininfo.nickname);
-        editor.putString("profile",logininfo.profileURL);
+        editor.putString("id", LoginUserInfo.id);
+        editor.putString("nickname", LoginUserInfo.nickname);
+        editor.putString("profile", LoginUserInfo.profileURL);
         editor.commit();
     }
 

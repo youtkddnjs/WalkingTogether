@@ -4,17 +4,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +29,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -40,7 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 
-public class myinfo extends AppCompatActivity {
+public class MyInfo extends AppCompatActivity {
 
     TextView nickname;
     CircleImageView profileImage;
@@ -55,7 +51,7 @@ public class myinfo extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.myinfo);
+        setContentView(R.layout.activity_myinfo);
 
         Toolbar myinfoToolbar = findViewById(R.id.myinfoToolbar);
         setSupportActionBar(myinfoToolbar);
@@ -68,8 +64,8 @@ public class myinfo extends AppCompatActivity {
         profileImage = findViewById(R.id.myinfoprofile_image);
 
 
-        nickname.setText(logininfo.nickname);
-        Glide.with(myinfo.this).load(logininfo.profileURL).into(profileImage);
+        nickname.setText(LoginUserInfo.nickname);
+        Glide.with(MyInfo.this).load(LoginUserInfo.profileURL).into(profileImage);
 
         //프로필 사진 변경 버튼
         myinfoprofile_imageedit = findViewById(R.id.myinfoprofile_imageedit);
@@ -81,7 +77,7 @@ public class myinfo extends AppCompatActivity {
                 resultLauncher.launch(intent);
             }
         }); //프로필 사진 변경 버튼
-        if(kakaologininfo.loginway){
+        if(KakaoLoginUserInfo.loginway){
             myinfoprofile_imageedit.setClickable(false);
             myinfoprofile_imageedit.setText("카카오 프로필");
         }
@@ -95,12 +91,12 @@ public class myinfo extends AppCompatActivity {
 
                 if(isChanged){
                     saveData();
-                    Intent intent = new Intent(getApplicationContext(),roomlist.class);
+                    Intent intent = new Intent(getApplicationContext(), RoomList.class);
                     startActivity(intent);
                     finish();
 
                 }else{
-                    Intent intent = new Intent(getApplicationContext(),roomlist.class);
+                    Intent intent = new Intent(getApplicationContext(), RoomList.class);
                     startActivity(intent);
                     finish();
                 }
@@ -122,7 +118,7 @@ public class myinfo extends AppCompatActivity {
                 Intent intent = result.getData();
                 imageURI = intent.getData(); // 선택한 프로필사진의 경로 uri 결과 데이터
 
-                Glide.with(myinfo.this).load(imageURI).into(profileImage);
+                Glide.with(MyInfo.this).load(imageURI).into(profileImage);
                 isChanged = true;
             }
         }
@@ -148,12 +144,12 @@ public class myinfo extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         //firebase 저장소에 저장되어 있는 이미지의 다운로드 주소 url을 문자열로 가져오기
-                        logininfo.profileURL = uri.toString();
+                        LoginUserInfo.profileURL = uri.toString();
 
                         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                        DatabaseReference profilesRef = firebaseDatabase.getReference("member/"+logininfo.id);
+                        DatabaseReference profilesRef = firebaseDatabase.getReference("member/"+ LoginUserInfo.id);
 
-                        profilesRef.child("ProFile").setValue(logininfo.profileURL);
+                        profilesRef.child("ProFile").setValue(LoginUserInfo.profileURL);
 
                         //SharedPreferences에 저장하기
                         SharedPreferences pref = getSharedPreferences("account", MODE_PRIVATE);
@@ -161,7 +157,7 @@ public class myinfo extends AppCompatActivity {
                         SharedPreferences.Editor editor = pref.edit();
                         
                         //쓰기작업
-                        editor.putString("profile",logininfo.profileURL);
+                        editor.putString("profile", LoginUserInfo.profileURL);
 
                         //쓰기 작업 종료
                         editor.commit();
@@ -175,7 +171,7 @@ public class myinfo extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
-                Intent intent = new Intent(getApplicationContext(),roomlist.class);
+                Intent intent = new Intent(getApplicationContext(), RoomList.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -185,7 +181,7 @@ public class myinfo extends AppCompatActivity {
 
 
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(),roomlist.class);
+        Intent intent = new Intent(getApplicationContext(), RoomList.class);
         startActivity(intent);
         super.onBackPressed();
     } //onBackPressed
