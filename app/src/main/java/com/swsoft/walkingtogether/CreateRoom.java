@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -35,6 +36,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class CreateRoom extends AppCompatActivity {
@@ -44,21 +50,20 @@ public class CreateRoom extends AppCompatActivity {
     Button time;
     int ahour=0;
     int aminute=0;
+    EditText createRoomTitle;
     SupportMapFragment mapFragment;
     LocationManager locationManager;
     GoogleMap mapMarker;
 
-
     TextView tv_hour;
     TextView tv_minute;
 
-
     double latitude;
     double longitude;
-
     double mapLatitude;
     double mapLongitude;
 
+    Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +83,7 @@ public class CreateRoom extends AppCompatActivity {
         time = findViewById(R.id.time);
         spinner_personnel = findViewById(R.id.spinner_personnel);
         create = findViewById(R.id.create);
+        createRoomTitle = findViewById(R.id.createRoomTitle);
 
         //Google Map 참조 변수
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -218,13 +224,26 @@ public class CreateRoom extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                SimpleDateFormat sdf = new SimpleDateFormat("ddhhss");
 
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
+                DatabaseReference createRoomRef = firebaseDatabase.getReference("room");
 
+                String title = createRoomTitle.getText().toString();
+                String hour = tv_hour.getText().toString();
+                String minute = tv_minute.getText().toString();
+                String latitude = mapLatitude+"";
+                String longitude = mapLongitude+"";
+                String chatroom = hour+minute+sdf.format(new Date())+"";
 
+                CreateRoomItem item = new CreateRoomItem(title, hour, minute, latitude, longitude,chatroom);
 
+                createRoomRef.push().setValue(item);
 
                 Intent intent = new Intent(getApplicationContext(), Waiting.class);
+                intent.putExtra("chatroom",chatroom);
+
                 startActivity(intent);
 
                 finish();

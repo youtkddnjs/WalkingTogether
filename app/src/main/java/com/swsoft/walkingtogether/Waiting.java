@@ -49,6 +49,8 @@ public class Waiting extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        Intent intent = getIntent();
+        String chatroom = intent.getStringExtra("chatroom");
 
         chatting = findViewById(R.id.chatting);
         chattingAdapter = new ChattingAdapter(Waiting.this, chattingItems);
@@ -60,7 +62,7 @@ public class Waiting extends AppCompatActivity {
         send = findViewById(R.id.send);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("chatroomname");
+        databaseReference = firebaseDatabase.getReference("chatroomname/"+chatroom);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
