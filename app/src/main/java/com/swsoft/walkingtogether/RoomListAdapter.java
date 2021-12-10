@@ -14,6 +14,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class RoomListAdapter extends RecyclerView.Adapter {
@@ -71,13 +77,13 @@ public class RoomListAdapter extends RecyclerView.Adapter {
                     int position = getLayoutPosition();
                     //2. 그리고 위치에 대한 요소 값
                     RoomListItem item = items.get(position);
-
 //                    RoomListItem item = items.get(getLayoutPosition()); //3. 1,2 한줄로 표시
+
+
 
                     Intent intent = new Intent(context, RoomInfo.class);
                     //intent로 전달
                     intent.putExtra("title",item.title);
-                    intent.putExtra("time",item.time);
 
                     context.startActivity(intent);
 
@@ -112,6 +118,5 @@ public class RoomListAdapter extends RecyclerView.Adapter {
         }//VH 생성자
 
     }//VH
-
 
 }//RoomListAdapter

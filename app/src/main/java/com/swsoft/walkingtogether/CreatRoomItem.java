@@ -1,6 +1,6 @@
 package com.swsoft.walkingtogether;
 
-public class CreateRoomItem {
+public class CreatRoomItem {
 
     public String roomTitle;
     public String roomHour;
@@ -8,15 +8,17 @@ public class CreateRoomItem {
     public String roomLatitude;
     public String roomLongitude;
     public String roomchattitle;
+    public int roomuser;
 
-    public CreateRoomItem () {}
+    public CreatRoomItem() {}
 
-    public CreateRoomItem(String roomTitle, String roomHour, String roomMinute, String roomLatitude, String roomLongitude, String roomchattitle) {
+    public CreatRoomItem(String roomTitle, String roomHour, String roomMinute, String roomLatitude, String roomLongitude, String roomchattitle, int roomuser) {
         this.roomTitle = roomTitle;
         this.roomHour = roomHour;
         this.roomMinute = roomMinute;
         this.roomLatitude = roomLatitude;
         this.roomLongitude = roomLongitude;
         this.roomchattitle = roomchattitle;
+        this.roomuser = roomuser;
     }
 }//CreateRoomItem

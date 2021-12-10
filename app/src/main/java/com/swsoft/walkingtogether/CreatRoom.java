@@ -11,6 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,14 +44,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class CreateRoom extends AppCompatActivity {
+public class CreatRoom extends AppCompatActivity {
 
-    Button create;
+    Button creat;
     Spinner spinner_personnel;
     Button time;
     int ahour=0;
     int aminute=0;
-    EditText createRoomTitle;
+    EditText creatRoomTitle;
     SupportMapFragment mapFragment;
     LocationManager locationManager;
     GoogleMap mapMarker;
@@ -62,15 +63,16 @@ public class CreateRoom extends AppCompatActivity {
     double longitude;
     double mapLatitude;
     double mapLongitude;
+    int user;
 
     Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_createroom);
+        setContentView(R.layout.activity_creatroom);
 
         //### Toolbar
-        Toolbar createRoomToolBar = findViewById(R.id.createRoomToolbar);
+        Toolbar createRoomToolBar = findViewById(R.id.creatRoomToolbar);
         setSupportActionBar(createRoomToolBar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -82,8 +84,8 @@ public class CreateRoom extends AppCompatActivity {
         tv_minute = findViewById(R.id.tv_minute);
         time = findViewById(R.id.time);
         spinner_personnel = findViewById(R.id.spinner_personnel);
-        create = findViewById(R.id.create);
-        createRoomTitle = findViewById(R.id.createRoomTitle);
+        creat = findViewById(R.id.creat);
+        creatRoomTitle = findViewById(R.id.createRoomTitle);
 
         //Google Map 참조 변수
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -115,14 +117,14 @@ public class CreateRoom extends AppCompatActivity {
 
 
         //### 인원 선택 spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(CreateRoom.this, R.array.spinner_personner_array,R.layout.spinner_selected);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(CreatRoom.this, R.array.spinner_personner_array,R.layout.spinner_selected);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_personnel.setAdapter(adapter);
 
         spinner_personnel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                user = position+1;
             }
 
             @Override
@@ -135,7 +137,7 @@ public class CreateRoom extends AppCompatActivity {
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerDialog tpd = new TimePickerDialog(CreateRoom.this,new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog tpd = new TimePickerDialog(CreatRoom.this,new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         if(hourOfDay == 0 ){
@@ -157,7 +159,7 @@ public class CreateRoom extends AppCompatActivity {
         //위치정보제공자 선택
         if (locationManager.isProviderEnabled("gps")) {
             //명시적으로 퍼미션체크 코드가 있어야 아래에 작성한 위치정보 취득 코드가 동작할 수있음.
-            if (ActivityCompat.checkSelfPermission(CreateRoom.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(CreateRoom.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(CreatRoom.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(CreatRoom.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
             //5초마다 또는 2M넘어갈때마다 찾으면 locationListener()를 한다.
@@ -170,7 +172,7 @@ public class CreateRoom extends AppCompatActivity {
 
         //마지막 위치
         if(location == null) {
-            Toast.makeText(CreateRoom.this, "위치를 못찾았습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CreatRoom.this, "위치를 못찾았습니다.", Toast.LENGTH_SHORT).show();
         }
         else{
                     latitude = location.getLatitude();//위도
@@ -186,7 +188,7 @@ public class CreateRoom extends AppCompatActivity {
 
                 LatLng latLng = new LatLng(latitude,longitude);
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
-                if (ActivityCompat.checkSelfPermission(CreateRoom.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(CreateRoom.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(CreatRoom.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(CreatRoom.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
                 googleMap.setMyLocationEnabled(true);
@@ -220,7 +222,7 @@ public class CreateRoom extends AppCompatActivity {
         locationManager.removeUpdates(locationListener);
 
         //방생성버튼
-        create.setOnClickListener(new View.OnClickListener() {
+        creat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -230,16 +232,18 @@ public class CreateRoom extends AppCompatActivity {
 
                 DatabaseReference createRoomRef = firebaseDatabase.getReference("room");
 
-                String title = createRoomTitle.getText().toString();
+                String title = creatRoomTitle.getText().toString();
                 String hour = tv_hour.getText().toString();
                 String minute = tv_minute.getText().toString();
                 String latitude = mapLatitude+"";
                 String longitude = mapLongitude+"";
                 String chatroom = hour+minute+sdf.format(new Date())+"";
+                CreatRoomItem item = new CreatRoomItem(title, hour, minute, latitude, longitude,chatroom, user);
 
-                CreateRoomItem item = new CreateRoomItem(title, hour, minute, latitude, longitude,chatroom);
-
-                createRoomRef.push().setValue(item);
+                createRoomRef.child(chatroom).setValue(item);
+                Log.i("creat name:", chatroom);
+//                DatabaseReference readyRef = firebaseDatabase.getReference("ready/"+chatroom);
+//                readyRef.setValue(user);
 
                 Intent intent = new Intent(getApplicationContext(), Waiting.class);
                 intent.putExtra("chatroom",chatroom);
@@ -288,7 +292,7 @@ public class CreateRoom extends AppCompatActivity {
         switch (requestCode){
             case 0:
                 if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(CreateRoom.this, "위지정보제공에 동의하였습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreatRoom.this, "위지정보제공에 동의하였습니다.", Toast.LENGTH_SHORT).show();
                 }else{
                     finish();
                 }

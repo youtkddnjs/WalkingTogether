@@ -42,7 +42,7 @@ public class RoomList extends AppCompatActivity {
         roomlistfab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RoomList.this, CreateRoom.class);
+                Intent intent = new Intent(RoomList.this, CreatRoom.class);
                 startActivity(intent);
                 finish();
             }

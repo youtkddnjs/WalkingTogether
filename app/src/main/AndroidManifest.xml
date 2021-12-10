@@ -41,7 +41,7 @@
         <activity android:name="com.swsoft.walkingtogether.Login"></activity>
         <activity android:name="com.swsoft.walkingtogether.Howto"></activity>
         <activity android:name="com.swsoft.walkingtogether.RoomList"></activity>
-        <activity android:name="com.swsoft.walkingtogether.CreateRoom"></activity>
+        <activity android:name="com.swsoft.walkingtogether.CreatRoom"></activity>
         <activity android:name="com.swsoft.walkingtogether.RoomInfo"></activity>
         <activity android:name="com.swsoft.walkingtogether.Waiting"></activity>
         <activity android:name="com.swsoft.walkingtogether.Walking"></activity>

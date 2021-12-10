@@ -10,6 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 
@@ -25,6 +31,32 @@ public class RoomListFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
+        DatabaseReference createRoomRef = firebaseDatabase.getReference("room");
+
+        createRoomRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterable<DataSnapshot> keys = snapshot.getChildren();
+
+                for(DataSnapshot t : keys) {
+                    CreatRoomItem item = t.getValue(CreatRoomItem.class);
+
+                    String title = item.roomTitle;
+                    String time = item.roomHour + ":" + item.roomMinute;
+
+                    items.add(0, new RoomListItem(title,time));
+                    adapter.notifyItemInserted(0);
+                    recyclerView.scrollToPosition(0);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         //임시데이터
         for(int i = 0 ; i <20 ; i++){
 
