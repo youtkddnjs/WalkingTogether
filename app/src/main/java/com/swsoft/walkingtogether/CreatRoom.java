@@ -238,6 +238,7 @@ public class CreatRoom extends AppCompatActivity {
                 String latitude = mapLatitude+"";
                 String longitude = mapLongitude+"";
                 String chatroom = hour+minute+sdf.format(new Date())+"";
+                ChatRoom.name = chatroom;
                 CreatRoomItem item = new CreatRoomItem(title, hour, minute, latitude, longitude,chatroom, user);
 
                 createRoomRef.child(chatroom).setValue(item);
@@ -246,6 +247,7 @@ public class CreatRoom extends AppCompatActivity {
 //                readyRef.setValue(user);
 
                 Intent intent = new Intent(getApplicationContext(), Waiting.class);
+
                 intent.putExtra("chatroom",chatroom);
 
                 startActivity(intent);
