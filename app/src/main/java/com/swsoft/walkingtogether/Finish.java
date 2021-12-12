@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,12 @@ import androidx.appcompat.widget.Toolbar;
 
 
 public class Finish extends AppCompatActivity {
+
+    int hour;
+    int minute;
+    int second;
+
+    TextView resulttime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +35,16 @@ public class Finish extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         Button complete = (Button) findViewById(R.id.complete);
 
+        Intent intent = getIntent();
+        hour = intent.getIntExtra("hour",0);
+        minute = intent.getIntExtra("minute",0);
+        second = intent.getIntExtra("second",0);
+
+        resulttime = findViewById(R.id.resulttime);
+
+        resulttime.setText(hour+"시간"+ minute+"분"+second+"초 입니다.");
+
+
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,8 +52,8 @@ public class Finish extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        });
-    }
+        });//완료버튼
+    }//onCreate
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -48,13 +65,13 @@ public class Finish extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }//뒤로가기
 
     public void onBackPressed() {
 
         Intent intent = new Intent(getApplicationContext(), RoomList.class);
         startActivity(intent);
         super.onBackPressed();
-    }
-}
+    }//뒤로가기
+}//Finish
 
